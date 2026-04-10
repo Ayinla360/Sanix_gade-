@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SANiX GADGETS — Phones & Electronics</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Exo+2:ital,wght@0,300;0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:       #07090f;
+  --bg2:      #0c1018;
+  --bg3:      #111620;
+  --card:     #0e1420;
+  --border:   #1c2535;
+  --navy:     #1a237e;
+  --navy2:    #283593;
+  --orange:   #f57c00;
+  --orange2:  #ff9800;
+  --orange-glow: rgba(245,124,0,0.35);
+  --text:     #c8d4e8;
+  --muted:    #4a5a74;
+  --white:    #eef3fa;
+  --green:    #00e676;
+  --red:      #ff5252;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Exo 2', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Subtle grid */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(rgba(245,124,0,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,35,126,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none; z-index: 0;
+}
+
+/* Scanlines */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(26,35,126,0.018) 3px, rgba(26,35,126,0.018) 4px
+  );
+  pointer-events: none; z-index: 9999;
+}
+
+/* ── NAVBAR ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(7,9,15,0.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.5);
+}
+
+.logo-wrap {
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 42px; width: auto;
+  filter: drop-shadow(0 0 6px rgba(245,124,0,0.4));
+}
+
+.logo-text {
+  display: flex; flex-direction: column; line-height: 1;
+}
+.logo-text .brand {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.35rem; font-weight: 700;
+  color: var(--white); letter-spacing: 0.1em;
+}
+.logo-text .brand span { color: var(--orange); }
+.logo-text .sub {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.58rem; color: var(--muted);
+  letter-spacing: 0.18em;
+}
+
+.nav-right { display: flex; align-items: center; gap: 10px; }
+
+.nav-link {
+  font-size: 0.78rem; color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.08em; cursor: pointer;
+  padding: 6px 10px; border-radius: 6px;
+  transition: color 0.2s;
+  background: none; border: none;
+}
+.nav-link:hover { color: var(--orange2); }
+
+.cart-btn {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(245,124,0,0.1);
+  border: 1px solid rgba(245,124,0,0.3);
+  border-radius: 8px; padding: 8px 14px;
+  color: var(--orange2); cursor: pointer;
+  font-family: 'Exo 2', sans-serif;
+  font-size: 0.82rem; font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+.cart-btn:hover {
+  background: rgba(245,124,0,0.2);
+  box-shadow: 0 0 14px rgba(245,124,0,0.25);
+}
+
+.cart-count {
+  background: var(--orange); color: #000;
+  font-size: 0.6rem; font-weight: 800;
+  border-radius: 50%; width: 17px; height: 17px;
+  display: none; align-items: center; justify-content: center;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative; z-index: 1;
+  padding: 56px 24px 36px;
+  text-align: center; overflow: hidden;
+}
+
+.hero-glow-left {
+  position: absolute; top: -80px; left: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(26,35,126,0.18) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-glow-right {
+  position: absolute; top: -60px; right: -60px;
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(245,124,0,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(245,124,0,0.08);
+  border: 1px solid rgba(245,124,0,0.28);
+  border-radius: 50px; padding: 5px 14px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem; color: var(--orange2);
+  letter-spacing: 0.12em; margin-bottom: 20px;
+}
+.hero-tag-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--orange); animation: pulse 1.8s infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.35; transform:scale(0.6); }
+}
+
+.hero h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(1.9rem, 6vw, 3.6rem);
+  font-weight: 700; color: var(--white);
+  letter-spacing: 0.04em; line-height: 1.1;
+  margin-bottom: 12px;
+}
+.hero h1 .highlight {
+  color: var(--orange);
+  text-shadow: 0 0 30px rgba(245,124,0,0.4);
+}
+.hero h1 .blue { color: #5c6bc0; }
+
+.hero p {
+  font-size: 0.95rem; color: var(--muted);
+  max-width: 460px; margin: 0 auto 28px;
+  line-height: 1.65;
+}
+
+/* Stats strip */
+.stats {
+  display: flex; justify-content: center; gap: 32px;
+  flex-wrap: wrap; margin-bottom: 32px;
+}
+.stat { text-align: center; }
+.stat-num {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.4rem; font-weight: 700; color: var(--orange);
+  display: block;
+}
+.stat-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.62rem; color: var(--muted); letter-spacing: 0.1em;
+}
+
+/* Search */
+.search-wrap {
+  max-width: 480px; margin: 0 auto;
+  position: relative;
+}
+.search-wrap input {
+  width: 100%;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 13px 48px 13px 18px;
+  color: var(--white); font-family: 'Exo 2', sans-serif;
+  font-size: 0.9rem; outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.search-wrap input::placeholder { color: var(--muted); }
+.search-wrap input:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(245,124,0,0.1);
+}
+.search-icon {
+  position: absolute; right: 15px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted); font-size: 1rem; pointer-events: none;
+}
+
+/* ── FILTERS ── */
+.filters {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  justify-content: center; padding: 24px 24px 28px;
+  position: relative; z-index: 1;
+}
+.filter-btn {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; padding: 6px 16px;
+  font-family: 'Exo 2', sans-serif; font-size: 0.78rem;
+  font-weight: 600; color: var(--muted); cursor: pointer;
+  transition: all 0.2s; letter-spacing: 0.04em;
+}
+.filter-btn:hover { border-color: var(--orange2); color: var(--orange2); }
+.filter-btn.active {
+  background: rgba(245,124,0,0.12);
+  border-color: var(--orange); color: var(--orange);
+  box-shadow: 0 0 10px rgba(245,124,0,0.15);
+}
+
+/* ── STATUS BAR ── */
+.status-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px 16px; position: relative; z-index: 1;
+}
+.status-left { display: flex; align-items: center; gap: 7px; }
+.status-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green); box-shadow: 0 0 6px var(--green);
+  animation: pulse 2s infinite;
+}
+.status-dot.loading { background: var(--orange2); box-shadow: 0 0 6px var(--orange2); }
+.status-dot.error   { background: var(--red); box-shadow: 0 0 6px var(--red); }
+.status-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem; color: var(--muted);
+}
+.product-count {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem; color: var(--muted);
+}
+
+/* ── PRODUCT GRID ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px; padding: 0 24px 48px;
+  position: relative; z-index: 1;
+}
+
+.product-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden; cursor: pointer;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  animation: cardIn 0.4s ease both;
+  position: relative;
+}
+@keyframes cardIn {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--orange);
+  box-shadow: 0 0 28px rgba(245,124,0,0.14), 0 8px 32px rgba(0,0,0,0.5);
+}
+
+.card-img {
+  width: 100%; aspect-ratio: 4/3;
+  object-fit: cover; display: block; background: var(--bg3);
+}
+.card-img-placeholder {
+  width: 100%; aspect-ratio: 4/3;
+  background: linear-gradient(135deg, var(--bg3), var(--bg2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3rem;
+}
+
+/* Corner accent */
+.product-card::after {
+  content: '';
+  position: absolute; top: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 28px 28px 0;
+  border-color: transparent var(--orange) transparent transparent;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.product-card:hover::after { opacity: 1; }
+
+.card-badge {
+  position: absolute; top: 10px; left: 10px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.62rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 4px;
+  letter-spacing: 0.08em;
+  background: var(--orange); color: #000;
+}
+.card-badge.used { background: #546e7a; color: var(--white); }
+.card-badge.sale { background: var(--green); color: #000; }
+.card-badge.hot  { background: var(--red); color: var(--white); }
+
+.card-body { padding: 14px; }
+.card-cat {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.62rem; color: var(--orange2);
+  letter-spacing: 0.12em; margin-bottom: 4px;
+  opacity: 0.75;
+}
+.card-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.05rem; font-weight: 600;
+  color: var(--white); line-height: 1.3; margin-bottom: 6px;
+}
+.card-specs {
+  font-size: 0.72rem; color: var(--muted);
+  line-height: 1.5; margin-bottom: 12px;
+  font-family: 'Share Tech Mono', monospace;
+}
+.card-footer { display: flex; align-items: center; justify-content: space-between; }
+.card-price {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem; font-weight: 700; color: var(--orange);
+}
+.card-price small {
+  font-size: 0.65rem; color: var(--muted);
+  font-family: 'Share Tech Mono', monospace;
+  display: block; line-height: 1;
+}
+.add-btn {
+  background: rgba(245,124,0,0.12);
+  border: 1px solid rgba(245,124,0,0.35);
+  border-radius: 6px; padding: 7px 12px;
+  color: var(--orange2); cursor: pointer;
+  font-size: 0.78rem; font-family: 'Exo 2', sans-serif;
+  font-weight: 600; letter-spacing: 0.04em;
+  transition: all 0.2s;
+}
+.add-btn:hover {
+  background: var(--orange); color: #000;
+  box-shadow: 0 0 14px rgba(245,124,0,0.4);
+}
+
+/* Empty / loading states */
+.empty-state {
+  text-align: center; padding: 60px 24px;
+  position: relative; z-index: 1;
+}
+.empty-icon { font-size: 3rem; margin-bottom: 12px; display: block; }
+.empty-state p { color: var(--muted); font-size: 0.88rem; }
+
+/* Setup notice */
+.setup-notice {
+  margin: 0 24px 20px; position: relative; z-index: 1;
+  background: rgba(245,124,0,0.06);
+  border: 1px solid rgba(245,124,0,0.25);
+  border-radius: 10px; padding: 14px 16px;
+  font-size: 0.8rem; color: #b08060; line-height: 1.65;
+  display: none;
+}
+.setup-notice strong { display: block; margin-bottom: 4px; color: var(--orange2); }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.88); backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 16px; max-width: 540px; width: 100%;
+  max-height: 92vh; overflow-y: auto; position: relative;
+  animation: modalIn 0.3s cubic-bezier(.22,1,.36,1);
+  box-shadow: 0 0 60px rgba(245,124,0,0.1), 0 24px 80px rgba(0,0,0,0.6);
+}
+@keyframes modalIn {
+  from { opacity:0; transform:scale(0.93) translateY(22px); }
+  to   { opacity:1; transform:scale(1) translateY(0); }
+}
+.modal::-webkit-scrollbar { width: 3px; }
+.modal::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* Orange top border on modal */
+.modal::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--navy), var(--orange), var(--navy2));
+  border-radius: 16px 16px 0 0;
+}
+
+.modal-img {
+  width: 100%; aspect-ratio: 16/9;
+  object-fit: cover; border-radius: 14px 14px 0 0; display: block;
+}
+.modal-img-placeholder {
+  width: 100%; aspect-ratio: 16/9;
+  background: linear-gradient(135deg, var(--bg3), var(--bg));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 5rem; border-radius: 14px 14px 0 0;
+}
+
+.modal-body { padding: 24px; }
+.modal-cat {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem; color: var(--orange2);
+  letter-spacing: 0.14em; margin-bottom: 5px;
+}
+.modal-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.75rem; font-weight: 700;
+  color: var(--white); margin-bottom: 8px;
+}
+.modal-price {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 2rem; font-weight: 700;
+  color: var(--orange); margin-bottom: 18px;
+  text-shadow: 0 0 20px rgba(245,124,0,0.3);
+}
+
+.modal-specs {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; margin-bottom: 18px;
+}
+.modal-specs h4 {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.66rem; color: var(--orange2);
+  letter-spacing: 0.14em; margin-bottom: 10px;
+}
+.spec-row {
+  display: flex; justify-content: space-between;
+  padding: 7px 0; border-bottom: 1px solid var(--border);
+  font-size: 0.82rem;
+}
+.spec-row:last-child { border-bottom: none; }
+.spec-key { color: var(--muted); font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; }
+.spec-val { color: var(--white); text-align: right; max-width: 58%; }
+
+.modal-desc {
+  font-size: 0.86rem; color: var(--muted);
+  line-height: 1.7; margin-bottom: 22px;
+  border-left: 2px solid rgba(245,124,0,0.3);
+  padding-left: 12px;
+}
+
+/* Order form */
+.order-form h4 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  color: var(--white); letter-spacing: 0.08em;
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.order-form h4::before {
+  content: ''; width: 3px; height: 14px;
+  background: var(--orange); border-radius: 2px;
+  box-shadow: 0 0 8px var(--orange-glow);
+}
+
+.form-row { margin-bottom: 10px; }
+.form-row label {
+  display: block; font-size: 0.68rem;
+  color: var(--muted); margin-bottom: 5px;
+  font-family: 'Share Tech Mono', monospace; letter-spacing: 0.08em;
+}
+.form-row input,
+.form-row textarea {
+  width: 100%; background: var(--bg3);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 12px; color: var(--white);
+  font-family: 'Exo 2', sans-serif; font-size: 0.88rem;
+  outline: none; transition: border-color 0.2s, box-shadow 0.2s; resize: none;
+}
+.form-row input:focus, .form-row textarea:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 2px rgba(245,124,0,0.1);
+}
+.form-row input::placeholder, .form-row textarea::placeholder { color: var(--muted); }
+.form-row textarea { min-height: 68px; }
+
+.qty-row { display: flex; gap: 8px; align-items: center; }
+.qty-btn {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; width: 34px; height: 34px;
+  color: var(--white); cursor: pointer; font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.qty-btn:hover { border-color: var(--orange); color: var(--orange); }
+.qty-display {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; width: 50px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Share Tech Mono', monospace; font-size: 0.9rem; color: var(--white);
+}
+
+.order-btn {
+  width: 100%; padding: 14px; margin-top: 16px;
+  background: linear-gradient(135deg, #e65100, var(--orange), #ff9800);
+  border: none; border-radius: 10px;
+  font-family: 'Rajdhani', sans-serif; font-size: 1.08rem; font-weight: 700;
+  color: #000; cursor: pointer; letter-spacing: 0.08em;
+  transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(245,124,0,0.3);
+  position: relative; overflow: hidden;
+}
+.order-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(245,124,0,0.45);
+}
+.order-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+.order-btn .btn-text { transition: opacity 0.2s; }
+.order-btn .spinner { display: none; }
+.order-btn.loading .btn-text { opacity: 0; }
+.order-btn.loading .spinner {
+  display: inline-block; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 20px; height: 20px;
+  border: 2px solid rgba(0,0,0,0.3); border-top-color: #000;
+  border-radius: 50%; animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+.close-btn {
+  position: absolute; top: 14px; right: 14px;
+  background: rgba(0,0,0,0.5); border: 1px solid var(--border);
+  border-radius: 50%; width: 32px; height: 32px;
+  color: var(--muted); cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; z-index: 10;
+}
+.close-btn:hover { border-color: var(--orange); color: var(--orange); }
+
+/* Order success */
+.order-success { display: none; text-align: center; padding: 28px 0 8px; }
+.success-icon {
+  font-size: 3.5rem; display: block; margin-bottom: 14px;
+  animation: bounceIn 0.5s cubic-bezier(.22,1,.36,1);
+}
+@keyframes bounceIn {
+  from { transform: scale(0.4); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.order-success h3 {
+  font-family: 'Rajdhani', sans-serif; font-size: 1.5rem;
+  color: var(--green); margin-bottom: 8px; letter-spacing: 0.06em;
+}
+.order-success p { font-size: 0.86rem; color: var(--muted); line-height: 1.65; }
+.order-success .brand-note {
+  margin-top: 14px; padding: 10px 14px;
+  background: rgba(245,124,0,0.06);
+  border: 1px solid rgba(245,124,0,0.2);
+  border-radius: 8px; font-size: 0.78rem; color: var(--orange2);
+  font-family: 'Share Tech Mono', monospace;
+}
+
+/* ── CART PANEL ── */
+.cart-overlay {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
+  display: none;
+}
+.cart-overlay.open { display: block; }
+
+.cart-panel {
+  position: fixed; top: 0; right: -420px; bottom: 0;
+  width: 100%; max-width: 400px; z-index: 301;
+  background: var(--bg2); border-left: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  transition: right 0.35s cubic-bezier(.22,1,.36,1);
+  box-shadow: -8px 0 40px rgba(0,0,0,0.5);
+}
+.cart-panel.open { right: 0; }
+
+.cart-header {
+  padding: 18px 20px; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(135deg, rgba(26,35,126,0.3), rgba(245,124,0,0.08));
+}
+.cart-title {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--white); letter-spacing: 0.1em;
+  display: flex; align-items: center; gap: 8px;
+}
+.cart-close {
+  background: none; border: 1px solid var(--border);
+  border-radius: 6px; padding: 5px 10px;
+  color: var(--muted); cursor: pointer;
+  font-family: 'Exo 2', sans-serif; font-size: 0.78rem;
+  transition: all 0.2s;
+}
+.cart-close:hover { border-color: var(--orange2); color: var(--orange2); }
+
+.cart-items { flex: 1; overflow-y: auto; padding: 14px; }
+.cart-items::-webkit-scrollbar { width: 3px; }
+.cart-items::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.cart-empty {
+  text-align: center; padding: 60px 20px;
+  color: var(--muted); font-size: 0.86rem;
+}
+.cart-empty .empty-icon { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+
+.cart-item {
+  display: flex; gap: 12px; align-items: center;
+  padding: 10px; background: var(--bg3);
+  border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px;
+  transition: border-color 0.2s;
+}
+.cart-item:hover { border-color: rgba(245,124,0,0.3); }
+.cart-item-img {
+  width: 52px; height: 52px; object-fit: cover;
+  border-radius: 6px; background: var(--bg2); flex-shrink: 0;
+}
+.cart-item-info { flex: 1; min-width: 0; }
+.cart-item-name {
+  font-family: 'Rajdhani', sans-serif; font-size: 0.9rem;
+  font-weight: 600; color: var(--white);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cart-item-price {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem; color: var(--orange);
+}
+.cart-item-qty { font-size: 0.7rem; color: var(--muted); }
+.cart-item-remove {
+  background: none; border: none; color: var(--muted);
+  cursor: pointer; font-size: 0.9rem; padding: 4px;
+  transition: color 0.2s;
+}
+.cart-item-remove:hover { color: var(--red); }
+
+.cart-footer {
+  padding: 16px 20px; border-top: 1px solid var(--border);
+  background: var(--bg3);
+}
+.cart-total {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 12px;
+}
+.cart-total-label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em;
+}
+.cart-total-price {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.5rem; font-weight: 700; color: var(--orange);
+  text-shadow: 0 0 16px rgba(245,124,0,0.3);
+}
+.checkout-btn {
+  width: 100%; padding: 13px;
+  background: linear-gradient(135deg, #e65100, var(--orange));
+  border: none; border-radius: 10px;
+  font-family: 'Rajdhani', sans-serif; font-size: 1rem;
+  font-weight: 700; color: #000; cursor: pointer;
+  letter-spacing: 0.08em; transition: all 0.25s;
+  box-shadow: 0 4px 16px rgba(245,124,0,0.25);
+}
+.checkout-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(245,124,0,0.4);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 24px;
+  position: relative; z-index: 1;
+  background: var(--bg2);
+}
+.footer-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 16px;
+  max-width: 900px; margin: 0 auto;
+}
+.footer-brand {
+  display: flex; align-items: center; gap: 10px;
+}
+.footer-logo { height: 32px; filter: drop-shadow(0 0 4px rgba(245,124,0,0.3)); }
+.footer-name {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem; font-weight: 700; color: var(--white);
+  letter-spacing: 0.1em;
+}
+.footer-name span { color: var(--orange); }
+.footer-links {
+  display: flex; gap: 18px;
+}
+.footer-link {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem; color: var(--muted);
+  text-decoration: none; letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+.footer-link:hover { color: var(--orange2); }
+.footer-copy {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.62rem; color: var(--muted);
+  letter-spacing: 0.06em; width: 100%;
+  text-align: center; margin-top: 16px;
+  border-top: 1px solid var(--border); padding-top: 14px;
+}
+
+@media (max-width: 520px) {
+  .grid { grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 10px; padding: 0 12px 32px; }
+  .hero { padding: 36px 14px 24px; }
+  nav { padding: 0 14px; }
+  .logo-text .brand { font-size: 1.1rem; }
+  .filters { padding: 16px 12px 22px; }
+  .status-bar { padding: 0 12px 14px; }
+  .modal-body { padding: 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="logo-wrap">
+    <img class="logo-img" src="sanix-logo.jpg" alt="SANiX GADGETS Logo">
+    <div class="logo-text">
+      <span class="brand">SANi<span>X</span></span>
+      <span class="sub">GADGETS STORE</span>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="nav-link" onclick="scrollToProducts()">PRODUCTS</button>
+    <button class="cart-btn" id="cartToggle">
+      🛒 Cart
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-glow-left"></div>
+  <div class="hero-glow-right"></div>
+  <div class="hero-tag"><div class="hero-tag-dot"></div> LIVE INVENTORY · FAST DELIVERY</div>
+  <h1>Premium <span class="highlight">Phones</span> &<br><span class="blue">Gadgets</span> You Can Trust</h1>
+  <p>Quality devices at the best prices. Order directly and get delivered fast — anywhere.</p>
+  <div class="stats">
+    <div class="stat"><span class="stat-num">500+</span><span class="stat-label">PRODUCTS</span></div>
+    <div class="stat"><span class="stat-num">24H</span><span class="stat-label">DELIVERY</span></div>
+    <div class="stat"><span class="stat-num">100%</span><span class="stat-label">AUTHENTIC</span></div>
+    <div class="stat"><span class="stat-num">5★</span><span class="stat-label">RATED</span></div>
+  </div>
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search iPhones, Samsung, laptops, earbuds…">
+    <span class="search-icon">🔍</span>
+  </div>
+</div>
+
+<!-- ── FILTERS ── -->
+<div class="filters" id="filters">
+  <button class="filter-btn active" data-cat="all">ALL</button>
+  <button class="filter-btn" data-cat="smartphone">SMARTPHONES</button>
+  <button class="filter-btn" data-cat="tablet">TABLETS</button>
+  <button class="filter-btn" data-cat="laptop">LAPTOPS</button>
+  <button class="filter-btn" data-cat="accessory">ACCESSORIES</button>
+  <button class="filter-btn" data-cat="audio">AUDIO</button>
+  <button class="filter-btn" data-cat="wearable">WEARABLES</button>
+</div>
+
+<!-- ── STATUS / SETUP ── -->
+<div class="status-bar" id="products">
+  <div class="status-left">
+    <div class="status-dot loading" id="statusDot"></div>
+    <span class="status-text" id="statusText">Loading inventory…</span>
+  </div>
+  <span class="product-count" id="productCount"></span>
+</div>
+
+<div class="setup-notice" id="setupNotice">
+  <strong>⚙️ Vendor — Connect your Telegram to go live</strong>
+  Set BOT_TOKEN, CHANNEL_ID, and ORDER_CHAT_ID in the script below.
+  Full guide is at the bottom of this file.
+</div>
+
+<!-- ── GRID ── -->
+<div class="grid" id="productGrid"></div>
+<div class="empty-state" id="emptyState" style="display:none">
+  <span class="empty-icon">📦</span>
+  <p>No products match your search.<br>Try a different category or keyword.</p>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img class="footer-logo" src="sanix-logo.jpg" alt="SANiX">
+      <span class="footer-name">SANi<span>X</span> GADGETS</span>
+    </div>
+    <div class="footer-links">
+      <a class="footer-link" href="#">HOME</a>
+      <a class="footer-link" href="#">PRODUCTS</a>
+      <a class="footer-link" href="#">CONTACT</a>
+      <a class="footer-link" href="#">ABOUT</a>
+    </div>
+  </div>
+  <div class="footer-copy">© 2025 SANiX GADGETS · ALL RIGHTS RESERVED · POWERED BY TELEGRAM</div>
+</footer>
+
+<!-- ── PRODUCT MODAL ── -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="close-btn" id="modalClose">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ── CART ── -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <span class="cart-title">🛒 YOUR CART</span>
+    <button class="cart-close" id="cartClose">CLOSE ✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><span class="empty-icon">🛒</span>Your cart is empty.<br>Start shopping!</div>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span class="cart-total-label">TOTAL AMOUNT</span>
+      <span class="cart-total-price" id="cartTotal">₦0</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn">📲 CHECKOUT VIA TELEGRAM</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  TELEGRAM CONFIG — fill these in to go live
+// ══════════════════════════════════════════════════════
+const BOT_TOKEN     = '8717103349:AAGy8UVzNUFbEDorsS8LJrxZ1JTpiy9UDy0';
+const CHANNEL_ID    = 'ID: -1003970934362';
+const ORDER_CHAT_ID = 'ID: -1003776367066';
+const CURRENCY      = '₦';
+const STORE_NAME    = 'SANiX GADGETS';
+
+const configured = !BOT_TOKEN.includes('YOUR_');
+if (!configured) document.getElementById('setupNotice').style.display = 'block';
+
+// ── DEMO PRODUCTS ──────────────────────────────────────
+const DEMO = [
+  { id:'d1',  name:'iPhone 15 Pro Max',        category:'smartphone', price:850000, condition:'New',  badge:'NEW',
+    specs:{ Storage:'256GB', RAM:'8GB', Color:'Titanium Black', Battery:'4422mAh', Network:'5G' },
+    description:'Apple's latest flagship with A17 Pro chip, titanium frame, and 5x optical zoom camera.', emoji:'📱' },
+  { id:'d2',  name:'Samsung Galaxy S24 Ultra', category:'smartphone', price:780000, condition:'New',  badge:'HOT',
+    specs:{ Storage:'512GB', RAM:'12GB', Color:'Phantom Black', Battery:'5000mAh', Network:'5G' },
+    description:'Built-in S Pen, 200MP camera, and Galaxy AI. Samsung's best ever.', emoji:'📱' },
+  { id:'d3',  name:'iPhone 14 Pro',            category:'smartphone', price:580000, condition:'UK-Used', badge:'USED',
+    specs:{ Storage:'128GB', RAM:'6GB', Color:'Deep Purple', Battery:'3200mAh', Network:'5G' },
+    description:'Excellent UK-used condition. Dynamic Island, 48MP camera, Always-On display.', emoji:'📱' },
+  { id:'d4',  name:'MacBook Pro M3 14"',       category:'laptop',     price:1200000, condition:'New', badge:'NEW',
+    specs:{ Storage:'512GB SSD', RAM:'18GB', Display:'14" Liquid Retina', Chip:'Apple M3', Battery:'22hr' },
+    description:'Blazing fast M3 chip for creators and developers. The best laptop money can buy.', emoji:'💻' },
+  { id:'d5',  name:'HP Pavilion 15',           category:'laptop',     price:320000, condition:'New',  badge:null,
+    specs:{ Storage:'512GB SSD', RAM:'16GB', Display:'15.6" FHD', CPU:'Intel Core i7', GPU:'Intel Iris Xe' },
+    description:'Perfect everyday laptop for students and professionals. Fast, light, and affordable.', emoji:'💻' },
+  { id:'d6',  name:'iPad Pro M2 12.9"',        category:'tablet',     price:620000, condition:'New',  badge:'NEW',
+    specs:{ Storage:'256GB', Chip:'Apple M2', Display:'12.9" XDR', Pencil:'Gen 2', Connectivity:'WiFi 6E' },
+    description:'Pro-level tablet. Supports Magic Keyboard and Apple Pencil for full productivity.', emoji:'📟' },
+  { id:'d7',  name:'AirPods Pro 2nd Gen',      category:'audio',      price:145000, condition:'New',  badge:'NEW',
+    specs:{ ANC:'Adaptive', Battery:'30hr', Chip:'H2', Fit:'Custom Ear Tips', Case:'MagSafe' },
+    description:'Best noise-cancelling earbuds. Adaptive Audio adjusts automatically.', emoji:'🎧' },
+  { id:'d8',  name:'Sony WH-1000XM5',          category:'audio',      price:210000, condition:'New',  badge:null,
+    specs:{ ANC:'Industry-leading', Battery:'30hr', Driver:'30mm', Weight:'250g', Codec:'LDAC' },
+    description:'Award-winning over-ear headphones with best-in-class noise cancellation.', emoji:'🎧' },
+  { id:'d9',  name:'Apple Watch Ultra 2',      category:'wearable',   price:380000, condition:'New',  badge:null,
+    specs:{ Case:'49mm Titanium', Battery:'60hr', Display:'Always-On OLED', GPS:'Dual-freq', Rating:'100m WR' },
+    description:'Built for extreme athletes and adventurers. The most capable Apple Watch ever.', emoji:'⌚' },
+  { id:'d10', name:'Samsung Galaxy Buds2 Pro', category:'audio',      price:89000,  condition:'New',  badge:'SALE',
+    specs:{ ANC:'Intelligent', Battery:'29hr', Audio:'Hi-Fi 24bit', Rating:'IPX7', Chip:'R510' },
+    description:'Premium Galaxy earbuds with Hi-Fi audio and intelligent ANC.', emoji:'🎧' },
+  { id:'d11', name:'Anker 65W GaN Charger',    category:'accessory',  price:18500,  condition:'New',  badge:'SALE',
+    specs:{ Wattage:'65W', Ports:'2x USB-C + 1x USB-A', Tech:'GaN II', Size:'Foldable', Compat:'Universal' },
+    description:'Charge 3 devices simultaneously. Half the size of standard chargers.', emoji:'🔌' },
+  { id:'d12', name:'Google Pixel 8 Pro',       category:'smartphone', price:490000, condition:'New',  badge:null,
+    specs:{ Storage:'256GB', RAM:'12GB', Camera:'50MP Triple', Battery:'5050mAh', Chip:'Tensor G3' },
+    description:'Google's AI-first flagship. Best computational photography + 7 years of updates.', emoji:'📱' },
+];
+
+// ── TELEGRAM FETCH ─────────────────────────────────────
+async function fetchTelegramProducts() {
+  try {
+    const res  = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?allowed_updates=channel_post&limit=100`);
+    const data = await res.json();
+    if (!data.ok) throw new Error(data.description);
+    const products = [];
+    for (const u of (data.result || [])) {
+      const msg = u.channel_post || u.message;
+      if (!msg) continue;
+      const caption = msg.caption || msg.text || '';
+      if (!caption.startsWith('PRODUCT')) continue;
+      const parsed = parseCaption(caption);
+      if (!parsed.name) continue;
+      let imageUrl = null;
+      if (msg.photo?.length) imageUrl = await getTgFile(msg.photo[msg.photo.length-1].file_id);
+      products.push({ id:'tg_'+msg.message_id, ...parsed, imageUrl });
+    }
+    return products;
+  } catch(e) { console.error(e); return null; }
+}
+
+async function getTgFile(fileId) {
+  try {
+    const res  = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getFile?file_id=${fileId}`);
+    const data = await res.json();
+    if (data.ok) return `https://api.telegram.org/file/bot${BOT_TOKEN}/${data.result.file_path}`;
+  } catch(e) {}
+  return null;
+}
+
+function parseCaption(text) {
+  const p = { specs:{} };
+  const specKeys = ['storage','ram','color','battery','network','display','chip','camera','connectivity','weight','wattage','ports','tech','size','compat','codec','rating','airtag','anc','driver','fit','case','gps','pencil','cpu','gpu'];
+  for (const line of text.split('\n')) {
+    const ci = line.indexOf(':'); if (ci === -1) continue;
+    const k = line.slice(0,ci).trim().toLowerCase();
+    const v = line.slice(ci+1).trim();
+    if      (k === 'name')        p.name        = v;
+    else if (k === 'price')       p.price       = parseFloat(v.replace(/,/g,''));
+    else if (k === 'category')    p.category    = v.toLowerCase();
+    else if (k === 'condition')   p.condition   = v;
+    else if (k === 'description') p.description = v;
+    else if (k === 'badge')       p.badge       = v.toUpperCase();
+    else if (specKeys.includes(k)) p.specs[k.charAt(0).toUpperCase()+k.slice(1)] = v;
+  }
+  p.emoji = ({smartphone:'📱',tablet:'📟',laptop:'💻',audio:'🎧',accessory:'🔌',wearable:'⌚'})[p.category] || '📦';
+  return p;
+}
+
+// ── STATE ───────────────────────────────────────────────
+let allProducts = [], filteredProds = [], activeFilter = 'all', searchQuery = '';
+let cart = [], currentProduct = null, orderQty = 1;
+
+// ── INIT ────────────────────────────────────────────────
+async function init() {
+  setStatus('loading', 'Loading inventory…');
+  let products = null;
+  if (configured) products = await fetchTelegramProducts();
+  allProducts = (products?.length) ? products : DEMO;
+  setStatus('ok', products?.length
+    ? `${products.length} products — live from Telegram`
+    : configured ? 'No channel posts yet — showing demo' : 'Demo mode · Connect Telegram to go live');
+  renderAll();
+}
+
+function setStatus(type, msg) {
+  const d = document.getElementById('statusDot');
+  d.className = 'status-dot' + (type==='loading'?' loading':type==='error'?' error':'');
+  document.getElementById('statusText').textContent = msg;
+}
+
+// ── RENDER ──────────────────────────────────────────────
+function renderAll() {
+  let p = [...allProducts];
+  if (activeFilter !== 'all') p = p.filter(x => x.category === activeFilter);
+  if (searchQuery)            p = p.filter(x =>
+    x.name.toLowerCase().includes(searchQuery) ||
+    (x.description||'').toLowerCase().includes(searchQuery) ||
+    x.category.toLowerCase().includes(searchQuery)
+  );
+  filteredProds = p;
+  document.getElementById('productCount').textContent = p.length + ' item' + (p.length!==1?'s':'');
+  const grid  = document.getElementById('productGrid');
+  const empty = document.getElementById('emptyState');
+  if (!p.length) { grid.innerHTML = ''; empty.style.display='block'; return; }
+  empty.style.display = 'none';
+  grid.innerHTML = p.map((item, i) => `
+    <div class="product-card" style="animation-delay:${i*0.04}s" onclick="openProduct('${item.id}')">
+      ${item.imageUrl
+        ? `<img class="card-img" src="${item.imageUrl}" alt="${item.name}" loading="lazy">`
+        : `<div class="card-img-placeholder">${item.emoji}</div>`}
+      ${item.badge ? `<div class="card-badge ${item.badge==='USED'?'used':item.badge==='SALE'?'sale':item.badge==='HOT'?'hot':''}">${item.badge}</div>` : ''}
+      <div class="card-body">
+        <div class="card-cat">${item.category.toUpperCase()}${item.condition?' · '+item.condition.toUpperCase():''}</div>
+        <div class="card-name">${item.name}</div>
+        <div class="card-specs">${Object.entries(item.specs||{}).slice(0,3).map(([k,v])=>`${k}: ${v}`).join(' · ')}</div>
+        <div class="card-footer">
+          <div class="card-price"><small>PRICE</small>${CURRENCY}${Number(item.price).toLocaleString()}</div>
+          <button class="add-btn" onclick="event.stopPropagation();quickAdd('${item.id}')">+ ADD</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── MODAL ───────────────────────────────────────────────
+function openProduct(id) {
+  currentProduct = allProducts.find(p=>p.id===id); if(!currentProduct) return;
+  orderQty = 1;
+  const p = currentProduct;
+  const specRows = Object.entries(p.specs||{}).map(([k,v]) =>
+    `<div class="spec-row"><span class="spec-key">${k}</span><span class="spec-val">${v}</span></div>`).join('');
+  document.getElementById('modalContent').innerHTML = `
+    ${p.imageUrl
+      ? `<img class="modal-img" src="${p.imageUrl}" alt="${p.name}">`
+      : `<div class="modal-img-placeholder">${p.emoji}</div>`}
+    <div class="modal-body">
+      <div class="modal-cat">${p.category.toUpperCase()}${p.condition?' · '+p.condition.toUpperCase():''}</div>
+      <div class="modal-name">${p.name}</div>
+      <div class="modal-price">${CURRENCY}${Number(p.price).toLocaleString()}</div>
+      ${specRows?`<div class="modal-specs"><h4>SPECIFICATIONS</h4>${specRows}</div>`:''}
+      ${p.description?`<p class="modal-desc">${p.description}</p>`:''}
+      <div class="order-form" id="orderForm">
+        <h4>PLACE YOUR ORDER</h4>
+        <div class="form-row"><label>FULL NAME</label><input type="text" id="oName" placeholder="Your full name"></div>
+        <div class="form-row"><label>PHONE NUMBER</label><input type="tel" id="oPhone" placeholder="e.g. 08012345678"></div>
+        <div class="form-row"><label>DELIVERY ADDRESS</label><textarea id="oAddress" placeholder="Street, City, State…"></textarea></div>
+        <div class="form-row">
+          <label>QUANTITY</label>
+          <div class="qty-row">
+            <button class="qty-btn" onclick="chQty(-1)">−</button>
+            <div class="qty-display" id="qtyDisplay">1</div>
+            <button class="qty-btn" onclick="chQty(1)">+</button>
+          </div>
+        </div>
+        <div class="form-row"><label>NOTE (optional)</label><input type="text" id="oNote" placeholder="Special requests, color preference…"></div>
+        <button class="order-btn" id="orderBtn" onclick="placeOrder()">
+          <span class="btn-text">📲 SEND ORDER VIA TELEGRAM</span>
+          <span class="spinner"></span>
+        </button>
+      </div>
+      <div class="order-success" id="orderSuccess">
+        <span class="success-icon">✅</span>
+        <h3>ORDER RECEIVED!</h3>
+        <p>Your order has been sent to SANiX GADGETS.<br>We'll contact you shortly to confirm delivery.</p>
+        <div class="brand-note">SANiX GADGETS · Fast · Reliable · Authentic</div>
+      </div>
+    </div>`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = ''; currentProduct = null;
+}
+
+function chQty(d) {
+  orderQty = Math.max(1, orderQty+d);
+  const el = document.getElementById('qtyDisplay'); if(el) el.textContent = orderQty;
+}
+
+async function placeOrder() {
+  const name    = document.getElementById('oName').value.trim();
+  const phone   = document.getElementById('oPhone').value.trim();
+  const address = document.getElementById('oAddress').value.trim();
+  const note    = document.getElementById('oNote').value.trim();
+  if (!name||!phone||!address) { alert('Please fill in your name, phone, and delivery address.'); return; }
+  const btn = document.getElementById('orderBtn');
+  btn.disabled=true; btn.classList.add('loading');
+  const p = currentProduct;
+  const total = Number(p.price)*orderQty;
+  const msg =
+    `🛒 *NEW ORDER — ${STORE_NAME}*\n\n`+
+    `📱 *Product:* ${p.name}\n`+
+    `🏷️ *Category:* ${p.category}\n`+
+    `📦 *Condition:* ${p.condition||'N/A'}\n`+
+    `💰 *Unit Price:* ${CURRENCY}${Number(p.price).toLocaleString()}\n`+
+    `🔢 *Quantity:* ${orderQty}\n`+
+    `💵 *Total:* ${CURRENCY}${total.toLocaleString()}\n\n`+
+    `👤 *Customer:* ${name}\n`+
+    `📞 *Phone:* ${phone}\n`+
+    `📍 *Address:* ${address}\n`+
+    (note?`📝 *Note:* ${note}\n`:'')+
+    `\n⏰ ${new Date().toLocaleString()}`;
+  try {
+    if (configured) {
+      const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ chat_id:ORDER_CHAT_ID, text:msg, parse_mode:'Markdown' })
+      });
+      const d = await r.json();
+      if (!d.ok) throw new Error(d.description);
+    }
+    document.getElementById('orderForm').style.display    = 'none';
+    document.getElementById('orderSuccess').style.display = 'block';
+  } catch(e) {
+    alert('Failed to send order.\n'+e.message);
+    btn.disabled=false; btn.classList.remove('loading');
+  }
+}
+
+// ── CART ─────────────────────────────────────────────────
+function quickAdd(id) {
+  const p = allProducts.find(x=>x.id===id); if(!p) return;
+  const ex = cart.find(c=>c.id===id);
+  if(ex) ex.qty++; else cart.push({...p,qty:1});
+  renderCart(); flashCart();
+}
+function removeFromCart(id) { cart=cart.filter(c=>c.id!==id); renderCart(); }
+function renderCart() {
+  const items = document.getElementById('cartItems');
+  const count = document.getElementById('cartCount');
+  const total = document.getElementById('cartTotal');
+  const qty   = cart.reduce((s,c)=>s+c.qty,0);
+  const val   = cart.reduce((s,c)=>s+c.price*c.qty,0);
+  count.textContent=qty; count.style.display=qty>0?'flex':'none';
+  total.textContent = CURRENCY+val.toLocaleString();
+  if(!cart.length){items.innerHTML=`<div class="cart-empty"><span class="empty-icon">🛒</span>Your cart is empty.<br>Start shopping!</div>`;return;}
+  items.innerHTML = cart.map(item=>`
+    <div class="cart-item">
+      ${item.imageUrl?`<img class="cart-item-img" src="${item.imageUrl}" alt="">`
+        :`<div class="cart-item-img" style="display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:var(--bg3)">${item.emoji}</div>`}
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${CURRENCY}${Number(item.price).toLocaleString()}</div>
+        <div class="cart-item-qty">Qty: ${item.qty}</div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">🗑</button>
+    </div>`).join('');
+}
+function flashCart() {
+  const btn = document.getElementById('cartToggle');
+  btn.style.background='rgba(245,124,0,0.3)';
+  setTimeout(()=>{btn.style.background='';},500);
+}
+
+document.getElementById('checkoutBtn').addEventListener('click', async()=>{
+  if(!cart.length) return;
+  const total = cart.reduce((s,c)=>s+c.price*c.qty,0);
+  const list  = cart.map(c=>`• ${c.name} x${c.qty} = ${CURRENCY}${(c.price*c.qty).toLocaleString()}`).join('\n');
+  const msg   = `🛒 *CART ORDER — ${STORE_NAME}*\n\n${list}\n\n💵 *Total: ${CURRENCY}${total.toLocaleString()}*\n⏰ ${new Date().toLocaleString()}\n\n_(Vendor will contact customer for details)_`;
+  if(configured){
+    try {
+      await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,{
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({chat_id:ORDER_CHAT_ID,text:msg,parse_mode:'Markdown'})
+      });
+    }catch(e){console.error(e);}
+  }
+  alert('✅ Cart order sent to SANiX GADGETS! We\'ll contact you shortly.');
+  cart=[]; renderCart(); closeCartPanel();
+});
+
+// ── CONTROLS ─────────────────────────────────────────────
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); activeFilter=btn.dataset.cat; renderAll();
+  });
+});
+document.getElementById('searchInput').addEventListener('input',e=>{
+  searchQuery=e.target.value.toLowerCase().trim(); renderAll();
+});
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalOverlay').addEventListener('click',e=>{if(e.target.id==='modalOverlay')closeModal();});
+document.getElementById('cartToggle').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click',  closeCartPanel);
+document.getElementById('cartOverlay').addEventListener('click', closeCartPanel);
+
+function openCart()      { document.getElementById('cartPanel').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeCartPanel(){ document.getElementById('cartPanel').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); document.body.style.overflow=''; }
+function scrollToProducts(){ document.getElementById('products').scrollIntoView({behavior:'smooth'}); }
+
+init();
+</script>
+
+<!--
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ⚙️  SANiX GADGETS — TELEGRAM SETUP GUIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1 — Create your bot
+  → @BotFather on Telegram → /newbot
+  → Copy token → paste: BOT_TOKEN = 'your_token'
+
+STEP 2 — Create a products channel
+  → New Telegram channel (e.g. "SANiX Products")
+  → Add bot as admin (can post messages)
+  → Get channel ID via @JsonDumpBot
+  → Paste: CHANNEL_ID = '-1001234567890'
+
+STEP 3 — Create an orders group
+  → New group (e.g. "SANiX Orders")
+  → Add bot as admin
+  → Paste: ORDER_CHAT_ID = '-1001234567890'
+
+STEP 4 — Post products to your channel:
+
+  PRODUCT
+  Name: iPhone 15 Pro Max
+  Price: 850000
+  Category: smartphone
+  Condition: New
+  Storage: 256GB
+  RAM: 8GB
+  Color: Titanium Black
+  Battery: 4422mAh
+  Network: 5G
+  Description: Latest Apple flagship with A17 Pro chip
+  Badge: NEW
+
+  (Attach a photo to the message for best results)
+  Categories: smartphone | tablet | laptop | audio | accessory | wearable
+  Badges: NEW | HOT | SALE | USED
+
+STEP 5 — Put sanix-logo.jpg in the SAME folder as this HTML file
+  (already done if you downloaded both files)
+
+STEP 6 — Host free on Netlify
+  → netlify.com → Deploy manually → drag folder
+  → Share your store link!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-->
+</body>
+</html>
